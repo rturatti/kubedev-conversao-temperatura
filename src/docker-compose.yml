@@ -1,0 +1,7 @@
+version: '3.8'
+
+services:
+  app-convert-temp:
+    image: rodrigoturatti/app-convert-temp:latest
+    ports:
+      - 80:8080
