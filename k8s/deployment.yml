@@ -1,0 +1,33 @@
+#Deployment do convert-temp
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: convert-temp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: convert-temp
+  template:
+    metadata:
+      annotations:
+        kubernetes.io/change-cause: V1
+      labels:
+        app: convert-temp
+    spec:
+      containers:
+      - name: convert-temp
+        image: rodrigoturatti/app-convert-temp:v1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: convert-temp
+spec:
+  selector:
+    app: convert-temp
+  ports:
+  - port: 80
+    targetPort: 8080
+    nodePort: 30000
+  type: NodePort
